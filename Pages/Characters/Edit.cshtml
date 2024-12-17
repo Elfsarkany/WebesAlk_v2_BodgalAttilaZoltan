@@ -1,0 +1,105 @@
+﻿@page
+@model WebesAlk_v2_BodgalAttilaZoltan.Pages.Characters.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Character</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Character.Id" />
+            <div class="form-group">
+                <label asp-for="Character.Strength" class="control-label"></label>
+                <input asp-for="Character.Strength" class="form-control" />
+                <span asp-validation-for="Character.Strength" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Dexterity" class="control-label"></label>
+                <input asp-for="Character.Dexterity" class="form-control" />
+                <span asp-validation-for="Character.Dexterity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Constitution" class="control-label"></label>
+                <input asp-for="Character.Constitution" class="form-control" />
+                <span asp-validation-for="Character.Constitution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Inteligence" class="control-label"></label>
+                <input asp-for="Character.Inteligence" class="form-control" />
+                <span asp-validation-for="Character.Inteligence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Wisdom" class="control-label"></label>
+                <input asp-for="Character.Wisdom" class="form-control" />
+                <span asp-validation-for="Character.Wisdom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Charisma" class="control-label"></label>
+                <input asp-for="Character.Charisma" class="form-control" />
+                <span asp-validation-for="Character.Charisma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Class" class="control-label"></label>
+                <select asp-for="Character.Class" class="form-control">
+                    @foreach (var enumValue in Enum.GetValues(typeof(Models.CharacterClasses)))
+                    {
+                        <option value="@enumValue">@enumValue</option>
+                    }
+                </select>
+                <span asp-validation-for="Character.Class" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Name" class="control-label"></label>
+                <input asp-for="Character.Name" class="form-control" />
+                <span asp-validation-for="Character.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Level" class="control-label"></label>
+                <input asp-for="Character.Level" class="form-control" />
+                <span asp-validation-for="Character.Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Race" class="control-label"></label>
+                <select asp-for="Character.Race" class="form-control">
+                    @foreach (var enumValue in Enum.GetValues(typeof(Models.Races)))
+                    {
+                        <option value="@enumValue">@enumValue</option>
+                    }
+                </select>
+                <span asp-validation-for="Character.Race" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Character.AverageHP" /> @Html.DisplayNameFor(model => model.Character.AverageHP)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Maxhp" class="control-label"></label>
+                <input asp-for="Character.Maxhp" class="form-control" />
+                <span asp-validation-for="Character.Maxhp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Character.Currenthp" class="control-label"></label>
+                <input asp-for="Character.Currenthp" class="form-control" />
+                <span asp-validation-for="Character.Currenthp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
