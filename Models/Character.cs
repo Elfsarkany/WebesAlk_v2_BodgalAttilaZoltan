@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebesAlk_v2_BodgalAttilaZoltan.Models
 {
@@ -25,5 +30,9 @@ namespace WebesAlk_v2_BodgalAttilaZoltan.Models
         public bool AverageHP { get; set; }
         public int Maxhp { get; set; }
         public int Currenthp { get; set; }
+        public string UserId { get; set; }
+
+        [ValidateNever]
+        public IdentityUser User { get; set; }
     }
 }

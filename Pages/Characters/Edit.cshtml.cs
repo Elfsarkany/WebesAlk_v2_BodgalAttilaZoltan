@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,10 +15,12 @@ namespace WebesAlk_v2_BodgalAttilaZoltan.Pages.Characters
     public class EditModel : PageModel
     {
         private readonly WebesAlk_v2_BodgalAttilaZoltan.Data.ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public EditModel(WebesAlk_v2_BodgalAttilaZoltan.Data.ApplicationDbContext context)
+        public EditModel(WebesAlk_v2_BodgalAttilaZoltan.Data.ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -36,6 +39,8 @@ namespace WebesAlk_v2_BodgalAttilaZoltan.Pages.Characters
                 return NotFound();
             }
             Character = character;
+            var user = await _userManager.GetUserAsync(User);
+            Character.UserId = user.Id;
             return Page();
         }
 
@@ -43,6 +48,9 @@ namespace WebesAlk_v2_BodgalAttilaZoltan.Pages.Characters
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            ModelState.Remove("Character.UserId");
+            var user = await _userManager.GetUserAsync(User);
+            Character.UserId = user.Id;
             if (!ModelState.IsValid)
             {
                 return Page();
